@@ -1,11 +1,11 @@
 local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 
 local function pb(b)
-           plr.CFrame = game:GetService("Workspace").Current.CurrentMap.Buttons:FindFirstChild(b).Hitbox.CFrame 
+        plr.CFrame = game:GetService("Workspace").Current.CurrentMap.Buttons:FindFirstChild(b).Head.CFrame
 end
 
 local function altpb(b)
-    plr.CFrame = game:GetService("Workspace").Current.CurrentMap:FindFirstChild(b).Hitbox.CFrame 
+        plr.CFrame = game:GetService("Workspace").Current.CurrentMap:FindFirstChild(b).Head.CFrame
 end
 
 local function win()
@@ -95,26 +95,37 @@ Tab:CreateButton("alt-Exit (all buttons must be pressed)" ,function()
 altwin()
 end)
 
-Tab:CreateButton("Delete water (w.i.p)" ,function()
-        game:GetService("Workspace").Current.CurrentMap.Liquid:Destroy()
-game:GetService("Workspace").Current.CurrentMap:WaitForChild("Water1"):Destroy()
-game:GetService("Workspace").Current.CurrentMap:WaitForChild("Water2"):Destroy()
-game:GetService("Workspace").Current.CurrentMap:WaitForChild("Water3"):Destroy()
-game:GetService("Workspace").Current.CurrentMap:WaitForChild("Water4"):Destroy()
-game:GetService("Workspace").Current.CurrentMap:WaitForChild("Water5"):Destroy()
+Tab:CreateButton("Delete water P1" ,function()
+    for _,v in pairs(game.Workspace.Current:GetChildren()) do
+        if v.Name == "Liquid" and v:IsA("Folder") then
+            v:Destroy()
+        end
+    end
+end)
+
+Tab:CreateButton("Delete water P2" ,function()
+    for _,v in pairs(game.Workspace.Current.CurrentMap.Liquid:GetChildren()) do
+        if v.Name == "State" or "DrainSpeed" then
+            v.Value = 0
+        end
+    end
 end)
 
 
-while _G.InfiniteAir == true do
- wait(0.5)
+_G.InfiniteAir = false
+
+Tab:CreateButton("Infinite Air", function()
+_G.InfiniteAir = true
+if _G.InfiniteAir == true then
  game.Players.LocalPlayer.PlayerInfo.MaxAir.Value = 999999
  game.Players.LocalPlayer.PlayerInfo.Air.Value = 999999
 end
-
-Tab:CreateButton("Infinite Air", function()
- while wait(1) do
-    game.Players.LocalPlayer.PlayerInfo.MaxAir.Value = 999999
-    game.Players.LocalPlayer.PlayerInfo.Air.Value = 999999
- end
 end)
 
+Tab:CreateButton("UnInfinite Air", function()
+_G.InfiniteAir = false
+if _G.InfiniteAir == false then
+    game.Players.LocalPlayer.PlayerInfo.MaxAir.Value = 100
+    game.Players.LocalPlayer.PlayerInfo.Air.Value = 100
+end
+end)

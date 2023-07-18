@@ -8,6 +8,12 @@ local function win()
     game.Workspace.Current.CurrentMap.ExitRegion.CFrame = plr.CFrame
 end
 
+game:GetService("StarterGui"):SetCore("SendNotification",{ 	
+    Title = "Note", 	
+    Text = "If the features dont work on mobile, re-execute the script!",
+    Duration = 5
+})
+
 local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/InfinitiveUI",true))()
 
 
@@ -59,13 +65,14 @@ game:GetService("Workspace").Current.CurrentMap:WaitForChild("Water4"):Destroy()
 game:GetService("Workspace").Current.CurrentMap:WaitForChild("Water5"):Destroy()
 end)
 
-Tab:CreateButton("Infinite Air", function()
-        game:GetService("Players").LocalPlayer.PlayerInfo.MaxAir.Value = 9999999
-        game:GetService("Players").LocalPlayer.PlayerInfo.Air.Value = 9999999
+_G.InfiniteAir = false
+
+Tab:CreateToggle("Infinite Air",false,function(t)
+	while _G.InfiniteAir == true do
+        wait(0.5)
+        game.Players.LocalPlayer.PlayerInfo.MaxAir.Value = 999999
+        game.Players.LocalPlayer.PlayerInfo.Air.Value = 999999
+    end
+    _G.InfiniteAir = t
 end)
 
-game:GetService("StarterGui"):SetCore("SendNotification",{ 	
-    Title = "Note", 	
-    Text = "If the features dont work on mobile, re-execute the script!",
-    Duration = 5
-})

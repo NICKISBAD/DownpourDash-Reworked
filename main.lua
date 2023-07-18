@@ -59,6 +59,11 @@ game:GetService("Workspace").Current.CurrentMap:WaitForChild("Water4"):Destroy()
 game:GetService("Workspace").Current.CurrentMap:WaitForChild("Water5"):Destroy()
 end)
 
+Tab:CreateButton("Infinite Air", function()
+        game:GetService("Players").LocalPlayer.PlayerInfo.MaxAir.Value = 9999999
+        game:GetService("Players").LocalPlayer.PlayerInfo.Air.Value = 9999999
+end)
+
 game:GetService("StarterGui"):SetCore("SendNotification",{ 	
     Title = "Note", 	
     Text = "If the features dont work on mobile, re-execute the script!",
